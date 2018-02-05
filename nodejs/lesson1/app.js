@@ -115,3 +115,13 @@ var writeStream=fs.createWriteStream(__dirname+'/stuff/test.mp4')
  readStream.pipe(writeStream).on('finish',()=>{
      log('pipe successful!')
  })
+
+
+ var startServer=require('./server')
+    var router=require('./route')
+    var handler=require('./handle')
+    var handle={}
+    handle['']=handler.home
+    handle['/home']=handler.home
+    handle['/view']=handler.view
+ startServer(router,handle);
