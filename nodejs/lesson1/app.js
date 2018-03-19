@@ -1,5 +1,5 @@
 const log = console.log.bind(console)
-var   stuff=require('./count')
+// var   stuff=require('./count')
 // let count = 0 const speed = 2000 const timer = setInterval(() => {     count
 // += 2     log(count + 'leesons1')     if (count >= 6) {
 // clearInterval(timer)     } }, speed) 全局变量 输出当前文件的路径与
@@ -31,36 +31,36 @@ var   stuff=require('./count')
 
 //事件 
 
-var events=require('events')
+// var events=require('events')
 
 // 工具类 核心库
-var util=require('util')
+// var util=require('util')
 
 
 // 创建一个对象
-var Person=function (name) {
-    this.name=name
-}
-// 继承 也可以用es6 extends  让person继承events.EventEmitter
-util.inherits(Person,events.EventEmitter)
+// var Person=function (name) {
+//     this.name=name
+// }
+// // 继承 也可以用es6 extends  让person继承events.EventEmitter
+// util.inherits(Person,events.EventEmitter)
 
-// 新建对象 把对象放到数组中
-var xiaoming=new Person('xiaoming')
-var lucy=new Person('lucy')
+// // 新建对象 把对象放到数组中
+// var xiaoming=new Person('xiaoming')
+// var lucy=new Person('lucy')
 
-var arry=[xiaoming,lucy]
+// var arry=[xiaoming,lucy]
 
-// 循环数组每个对象绑定一个事件
-arry.forEach(function(arry){
-    arry.on('speak',function(msg){
-        log(arry.name+ "said:" +msg)
-    })
-}) 
+// // 循环数组每个对象绑定一个事件
+// arry.forEach(function(arry){
+//     arry.on('speak',function(msg){
+//         log(arry.name+ "said:" +msg)
+//     })
+// }) 
 
-// 触发
+// // 触发
 
-xiaoming.emit('speak','hi')
-lucy.emit('speak','you')
+// xiaoming.emit('speak','hi')
+// lucy.emit('speak','you')
 
 // var myEmitter=new events.EventEmitter()
 // myEmitter.on('someEvent',function(msg){
@@ -73,17 +73,17 @@ lucy.emit('speak','you')
 
 // 文件的读写
 
-var fs=require('fs')
+// var fs=require('fs')
 
-var readfile=fs.readFile('read.txt','utf-8',(err,data)=>{
-    if(err){
-        log(err)
-    }else{
-        fs.writeFile('wirte.txt',data,()=>{
-            log('readed finisded')
-        })
-    }
-})
+// var readfile=fs.readFile('read.txt','utf-8',(err,data)=>{
+//     if(err){
+//         log(err)
+//     }else{
+//         fs.writeFile('wirte.txt',data,()=>{
+//             log('readed finisded')
+//         })
+//     }
+// })
 
 
 
@@ -103,8 +103,8 @@ var readfile=fs.readFile('read.txt','utf-8',(err,data)=>{
 
 // 流stream的操作
 
-var readStream=fs.createReadStream(__dirname+"/20171222_160840.mp4")
-var writeStream=fs.createWriteStream(__dirname+'/stuff/test.mp4')
+// var readStream=fs.createReadStream(__dirname+"/20171222_160840.mp4")
+// var writeStream=fs.createWriteStream(__dirname+'/stuff/test.mp4')
 
 // readStream.on('data',(chunk)=>{
 //     log('new chunk received!')
@@ -112,9 +112,9 @@ var writeStream=fs.createWriteStream(__dirname+'/stuff/test.mp4')
 //     writeStream.write(chunk)
 // })
 
- readStream.pipe(writeStream).on('finish',()=>{
-     log('pipe successful!')
- })
+//  readStream.pipe(writeStream).on('finish',()=>{
+//      log('pipe successful!')
+//  })
 
 
  var startServer=require('./server')
@@ -124,4 +124,6 @@ var writeStream=fs.createWriteStream(__dirname+'/stuff/test.mp4')
     handle['']=handler.home
     handle['/home']=handler.home
     handle['/view']=handler.view
+    handle['/api']=handler.api
+    handle['/xt']=handler.xt
  startServer(router,handle);
