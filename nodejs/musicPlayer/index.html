@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,83 +8,117 @@
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title>musicPlayer</title>
     <style>
-        *{margin: 0;padding: 0;box-sizing: border-box;}
-        ul,li{list-style: none;}
-        .cover{
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* color: #fff; */
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        .cover {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: url('../images/bg.jpg');
+            background-image: url('../images/bg.jpg');
             background-size: cover;
             /* filter: blur(5px); */
         }
-        .musicBox{
+
+        .musicBox {
             width: 500px;
             /* height: 200px; */
             left: 50%;
-            top:50%;
+            top: 50%;
             border: 1px solid red;
             position: absolute;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
         }
-        .musicPanel{
+
+        .musicPanel {
             border: 2px solid black;
         }
-       .music .control{
+
+        .music .control {
             border: 1px seagreen solid;
             position: absolute;
             cursor: pointer;
         }
-    
-        .music .control span{
-           display: inline-block;
-           margin: 8px;
+
+        .music .control span {
+            display: inline-block;
+            margin: 8px;
         }
-        .music .info{    
-           text-align: center;
+
+        .music .info {
+            text-align: center;
         }
-        .progress .time{
+
+        .progress .time {
             float: right;
-            margin-right:16px; 
+            margin-right: 16px;
         }
-        .progress::after{
+
+        .progress::after {
             content: '';
             display: block;
             clear: both;
             height: 100%;
         }
-        .progress .bar{
+
+        .progress .bar {
             margin-top: 16px;
+            cursor: pointer;
         }
-        .progress .bar .progress-total{
+
+        .progress .bar .progress-total {
             height: 2px;
             background: red;
             z-index: 10;
         }
-        .progress .bar .progress-now{
-            width: 50%;
+
+        .progress .bar .progress-now {
+            width: 0%;
             height: 3px;
-            background:yellow;
+            background: yellow;
             position: relative;
             margin-top: -3px;
         }
+        .list li{
+            cursor: pointer;
+            border: 1px solid grey;
+        }
+        .list li:hover{
+            background: pink;
+        }
     </style>
 </head>
+
 <body>
     <div class="cover"></div>
     <div class="musicBox">
         <div class="musicPanel">
             <div class="music">
                 <div class="control">
-                        <span class=""><i class="fa fa-backward" aria-hidden="true"></i> </span>
-                        <span class=""><i class="fa fa-play" aria-hidden="true"></i></span>
-                        <span class=""><i class="fa fa-forward" aria-hidden="true"></i></span>
+                    <span class="prev">
+                        <i class="fa fa-backward" aria-hidden="true"></i>
+                    </span>
+                    <span class="stop">
+                        <i class="fa fa-pause" aria-hidden="true"></i>
+                    </span>
+                    <span class="next">
+                        <i class="fa fa-forward" aria-hidden="true"></i>
+                    </span>
                 </div>
                 <div class="info">
                     <div class="title">歌曲名称</div>
                     <div class="author">歌手</div>
                 </div>
-             
+
             </div>
             <div class="progress">
                 <div class="bar">
@@ -96,10 +131,15 @@
         </div>
         <ul class="list">
             <!-- ajax生成的 -->
+            <!-- <li>七里香</li>
             <li>七里香</li>
-            <li>七里香</li>
-            <li>七里香</li>
+            <li>七里香</li> -->
         </ul>
     </div>
 </body>
+<script>
+   
+</script>
+<script src="./js/index.js"></script>
+
 </html>
