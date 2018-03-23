@@ -1,0 +1,43 @@
+<% include header %>
+    <h2>查找客户信息</h2>
+    <form method="post">
+        <input type="radio" checked name="reach_type" value="0" id="_1">
+        <label for="_1">按姓名查找</label>
+        <input type="radio" name="reach_type" value="1" id="_2">
+        <label for="_2">按手机号查找</label>
+        <br><br>
+        <input type="text" name="keyword">
+        <button type="submit" class="btn btn-danger">查找</button>
+    </form>
+    <% if(result) { %>
+        <h3>查询结果：</h3>
+        <div class="table-responsive">
+                <table class="table table-hover table-bordered table-striped">
+                    <thead>
+                        <th>姓名</th>
+                        <th>邮箱</th>
+                        <th>电话</th>
+                        <th>标题</th>
+                        <th>信息</th>
+                      
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td><%= result[0].name %></td>
+                            <td><%= result[0].email %></td>
+                            <td><%= result[0].phone %></td>
+                            <td><%= result[0].title %></td>
+                            <td><%= result[0].msg %></td>
+                            
+                        </tr>
+                    
+                    </tbody>
+                </table>
+              </div>
+
+        <!-- 姓名：<%= result[0].name %>，手机号码：<%= result[0].phone %> -->
+        <br><br>
+        <!-- <a href='/'>查询完成 点击返回主页</a> -->
+    <% } %>
+<% include footer %>

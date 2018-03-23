@@ -1,0 +1,43 @@
+<% include header %>
+    <h3>修改客户信息</h3>
+    <form method="post">
+        <ul>
+            <% for(var i = 0; i < result.length; i++) { %>
+            <li>
+                姓名：<input type="text" name="name" value=<%= result[i].name %>>
+                手机号：<input type="text" name="phone" value=<%= result[i].phone %>>
+                <input hidden type="text" name="_id" value=<%= result[i]._id %>>
+                <input type="radio" name='num' value=<%= i %>>
+            </li>
+            <% } %>
+        </ul>
+
+
+
+        <!-- <div class="table-responsive">
+                <table class="table table-hover table-bordered table-striped">
+                    <thead>
+                        <th>姓名</th>
+                        <th>邮箱</th>
+                        <th>电话</th>
+                        <th>标题</th>
+                        <th>信息</th>
+                        <th>删除</th>
+                    </thead>
+                    <tbody>
+                            <% for(var i = 0; i < result.length; i++) { %>
+                        <tr>
+                            <td><input type="text" name="name" value=<%= result[i].name %>></td>
+                            <td><%= result[i].email %></td>
+                            <td><%= result[i].phone %></td>
+                            <td><%= result[i].title %></td>
+                            <td><%= result[i].msg %></td>
+                            <td><input type="radio" name="student" value=<%= result[i]._id%>></td>
+                        </tr>
+                        <% } %>  
+                    </tbody>
+                </table>
+              </div> -->
+        <button type="submit" class="btn btn-danger">确定</button>
+    </form>
+<% include footer %>
