@@ -15,8 +15,8 @@ db.sendMail = function (xlsxname, callback) {
   var mailOptions = {
     from: '541157208@qq.com', //你的邮箱
     to: `2453555631@qq.com`, //你老板的邮箱
-    subject: '今天的客户数据，格式自己处理下!', 
-    html: `<h2>里面的具体的信息</h2>` ,
+    subject: '客户数据!', 
+    html: `<h3>请下载excel表格查看数据</h3>` ,
     attachments:[{
     	filename : xlsxname,
     	path : `./${xlsxname}`
