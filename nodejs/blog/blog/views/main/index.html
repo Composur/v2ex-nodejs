@@ -1,14 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>blog</title>
-    <link rel="stylesheet" href="../public/css/index.css">
+    <title>bolg</title>
+    <link rel="stylesheet" href="../../public/css/index.css">
 </head>
+
 <body>
-    <!-- <h1>欢迎光临我的博客!!!！</h1> -->
-    <h3>test</h3>
+ 
+
+    {% if userInfo._id %}
+    <div class="userInfo">
+        <h1>用户信息</h1>
+        <span class="user">{{userInfo.username}}</span>
+        <p>欢迎！</p>
+        <span class="message"></span>
+        <button type="submit" class="exit">退出</button>
+    </div>
+    {% else %}
+
+    <div id="login">
+        <h3>登陆</h3>
+
+        用户名：
+        <input type="text" name="username"> 密码：
+        <input type="text" name="password">
+        <span class="message"></span>
+        <button type="submit" value="登陆">登陆</button>
+        <a href="javaScript:;">点击注册</a>
+
+    </div>
+
+
+    <div id="register">
+        <h3>注册</h3>
+
+        用户名：
+        <input type="text" name="username"> 密码：
+        <input type="passwpord" name="password"> 重复密码：
+        <input type="password" name="repassword">
+        <span class="message"></span>
+        <button type="submit">注册</button>
+        <a href="javaScript:;"></a>
+       
+    </div>
+    {% endif %}
 </body>
+<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.js"></script>
+<script src="../../public/js/index.js"></script>
+
 </html>

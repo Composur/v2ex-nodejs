@@ -2,6 +2,12 @@ var express=require('express')
 var app=express()
 var swig=require('swig')
 var mongoose=require('./db/mongoose')
+// 用来处理post提交过来的数据
+var bodyParser=require('body-parser')
+
+// 加载cookie
+
+var Cookie=require('cookies')
 var config=require('./config')
 // 配置模板引擎第一个参数表示模板的名称（模板文件的后缀），第二个表示用于解析处理模板的内容
 app.engine('html',swig.renderFile)
@@ -21,6 +27,25 @@ swig.setDefaults({
 app.use('/public',express.static(__dirname+'/public'))
 
 
+// bodyParser设置,会在app对象的req对象上增加一个属性body（post提交的数据）
+app.use(bodyParser.urlencoded({extended:true}))
+
+// 通过中间件设置cookie
+app.use(function(req,res,next){
+    req.cookies=new Cookie(req,res)
+    
+    req.userInfo={}
+    // 解析用户登陆的cookie信息
+    if(req.cookies.get('userInfo')){
+        try {
+            req.userInfo=JSON.parse(req.cookies.get('userInfo'))
+            // console.log(req.userInfo)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    next()
+})
 // 路由绑定
 // // 首页
 // app.get('/',function(req,res,next){
