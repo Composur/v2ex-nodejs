@@ -11,12 +11,18 @@
 
 <body>
  
-
+<!-- id存在表示用户登陆状态 -->
     {% if userInfo._id %}
     <div class="userInfo">
-        <h1>用户信息</h1>
+        <h1>用户信息</h1>   
+        {% if (userInfo.isAdmin) %}
+        <span class="user">{{userInfo.username}}</span>
+        <p>欢迎管理员！</p>
+        <a href="/admin">进入后台</a>
+        {% else %}
         <span class="user">{{userInfo.username}}</span>
         <p>欢迎！</p>
+        {% endif  %}
         <span class="message"></span>
         <button type="submit" class="exit">退出</button>
     </div>
@@ -24,28 +30,24 @@
 
     <div id="login">
         <h3>登陆</h3>
-
         用户名：
         <input type="text" name="username"> 密码：
         <input type="text" name="password">
         <span class="message"></span>
         <button type="submit" value="登陆">登陆</button>
         <a href="javaScript:;">点击注册</a>
-
     </div>
 
 
-    <div id="register">
+    <div id="register" style="display:none">
         <h3>注册</h3>
-
         用户名：
         <input type="text" name="username"> 密码：
         <input type="passwpord" name="password"> 重复密码：
         <input type="password" name="repassword">
         <span class="message"></span>
         <button type="submit">注册</button>
-        <a href="javaScript:;"></a>
-       
+        <a href="javaScript:;"></a>     
     </div>
     {% endif %}
 </body>

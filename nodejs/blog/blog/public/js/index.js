@@ -55,19 +55,20 @@ var user=$('.user')
                 login.find('.message').html(result.message)
                 user.html(result.userInfo.username)
               if(!result.code){
+                //   登陆成功刷新页面
                   window.location.reload()
               }
             }
         })
     })
      //登出
-     userInfo.find('button').on('click',function(e){
-        // e.prevetDefault()
+    userInfo.find('button').on('click',function(e){
         $.ajax({
             type :'get',
             url:'api/user/exit',
             success:function(result){
                if(!result.code){
+                //    登出刷新页面这个时候cookie已经不存在了
                    window.location.reload()
                }
             }

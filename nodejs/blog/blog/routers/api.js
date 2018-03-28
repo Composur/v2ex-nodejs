@@ -44,7 +44,7 @@ router.post('/user/register', function (req, res, next) {
         return
     }
 
-    // 查找数据了进行判断
+    // 注册判断  查找数据了进行判断
     User
         .findOne({username: username})
         .then(function (userInfo) {
@@ -77,6 +77,7 @@ router.post('/user/login', function (req, res, next) {
         res.json(responseData)
         return
     }
+
     // 查询数据库 User.findOne({username:})
     User.findOne({
         username:username,
@@ -91,27 +92,27 @@ router.post('/user/login', function (req, res, next) {
         responseData.message='success!'
 
         // 设置前端的提示信息
-
         responseData.userInfo={
             _id:userInfo._id,
             username:userInfo.username
         }
-        // 设置cookie以后浏览器再访问服务端的时候就会带上这段cookie，通过这段cookie来验证是否是一个登陆状态
+
+        // 种植cookie 设置cookie以后浏览器再访问服务端的时候就会带上这段cookie，通过这段cookie来验证是否是一个登陆状态
+        // userInfo是cookie的名字
         req.cookies.set('userInfo',JSON.stringify({
             _id:userInfo._id,
             username:userInfo.username
         }))
-
         res.json(responseData)
         return
     })
 })
 
-
+// 退出,把cookie设置为空
 router.get('/user/exit',function(req,res,next){
     // 把cookie设置为空
     req.cookies.set('userInfo',null)
-    responseData.message="退出"
+    responseData.message="退出成功!"
     res.json(responseData)
     return
 })
