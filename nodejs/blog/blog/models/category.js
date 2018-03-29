@@ -1,4 +1,4 @@
 var mongoose=require('mongoose')
-var userSchema=require('../schemas/category')
+var categorySchema=require('../schemas/category')
 
-module.exports=mongoose.model('category',userSchema)
+module.exports=mongoose.model('category',categorySchema)

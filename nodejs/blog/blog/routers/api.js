@@ -113,7 +113,8 @@ router.get('/user/exit',function(req,res,next){
     // 把cookie设置为空
     req.cookies.set('userInfo',null)
     responseData.message="退出成功!"
-    res.json(responseData)
+    // res.json(responseData)
+    res.render('main/index')
     return
 })
 

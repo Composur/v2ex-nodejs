@@ -1,3 +1,4 @@
+
 var express = require('express');
 var router = express.Router();
 var User=require('../models/users')
@@ -61,28 +62,64 @@ router.get('/user', function(req, res, next) {
                 page:page,
                 count:count,
                 limit:limit,
-                pages:pages
+                pages:pages,
+                message:'active'
             })
         })
     
     })
     
-    
-  
 });
 
 // 分类首页
 router.get('/category',function(req,res,next){
     
 
-    res.render('admin/category',{
-        userInfo:req.userInfo
+    /**
+     * 进行分页处理,借用数据库的limit()限制获取的条数
+     * skip(2)忽略掉前两条数据,从第三条数据开始显示
+     * 通过http请求得到前端传来的分页数据\
+     * 用User.count()得到数据的总数
+     */
+    var page=Number(req.query.page||1)
+    var pages=0
+    var limit=10
+
+
+        Category.count().then(function(count){
+        // console.log(count)
+        // 因为是异步的要放到里面
+
+
+        // 计算总页数
+        pages=Math.ceil(count/limit)
+
+        // 限定page的范围
+
+        page=Math.min(page,pages)//最不能大于最大页数
+        page=Math.max(page,1)//最小是第一页
+
+        var skip=(page-1)*limit
+        Category.find().limit(limit).skip(skip).then(function(categorys){
+            res.render('admin/category',{
+                userInfo:req.userInfo,
+                categorys:categorys,
+                page:page,
+                count:count,
+                limit:limit,
+                pages:pages
+            })
+        })
+
     })
+    // res.render('admin/category',{
+    //     userInfo:req.userInfo
+    // })
 })
 
 
 
-// 添加首页
+// 添加分类首页
 router.get('/category/add',function(req,res,next){
     
 
@@ -93,24 +130,134 @@ router.get('/category/add',function(req,res,next){
 
 // 得到新增分类的数据
 router.post('/category/add',function(req,res,next){
-        var name=req.body.name||''
-       console.log(req.userInfor)
+        var name=req.body.name||'';
 
-        // 判断数据类型 
+        //验证提交的数据
         if(name==''){
             res.render('admin/error',{
                 userInfo:req.userInfo,
+                url:'/admin/category/add',
                 message:'分类名不能为空!'
             })
-        }
-
-       console.log(req.body)
-        
-    // res.render('admin/category_add',{
-    //     userInfo:req.userInfo
-    // })
+            return Promise.reject('分类名不能为空').then((reason)=>{
+                console.log(reason)
+            })
+        }else{
+            Category.findOne({name:name}).then(function(className){
+                if(className){
+                    res.render('admin/error',{
+                        userInfo:req.userInfo,
+                        url:'/admin/category/add',
+                        message:'分类名已经存在'
+                    })
+                    return Promise.reject('分类名已经存在').then(function(reason){
+                        console.log(reason)
+                    })
+                }else{
+                    return   new Category({name:name}).save()
+                }
+            }).then(function(newCategory){
+              
+                res.render('admin/category_add_success',{
+                    userInfo:req.userInfo,
+                    url:'category/add'
+                })
+            })
+        }     
 })
 
+/**
+ * 分类修改与删除
+ */
+
+//  分类的修改
+router.get('/category/edit',function(req,res){
+    // 获取数据;点击删除的a连接已经把id发送给了浏览器
+    var id=req.query.id||''
+    // console.log(id)
+    Category.findOne({_id:id}).then(function(Id){
+        // console.log(Id)
+        if(!Id){
+            res.render('admin/error',{
+                userInfo:req.userInfo,
+                message:'修改的对象不存在'
+            })
+            // return Promise.reject()
+        }else{
+            res.render('admin/category_edit',{
+                userInfo:req.userInfo,
+                category:Id
+            })
+        }
+    }) 
+})
+
+// 修改后的保存
+router.post('/category/edit',function(req,res){
+    var id=req.query.id
+    var name=req.body.name.replace(/\s+/g,"")
+
+    // 先判断修改的数据是否在数据库存在
+    Category.findOne({_id:id}).then(function(category){
+        if(!category){
+            res.render('admin/error',{
+                userInfo:req.userInfo,
+                message:'修改的对象不在数据库中'
+            })
+            // return Promise.reject()
+        }else{
+            // 存在 判断是否做了修改
+            if(name==category.name){
+                console.log('true')
+                res.render('admin/error',{
+                    userInfo:req.userInfo,
+                    message:'未对数据进行修改'
+                })
+                return Promise.reject('未对数据进行修改').then(reason=>{
+                    console.log(reason)
+                })
+            }else{
+                /**
+                 * 修改的类名和数据库中存在的一样
+                 * 把这个信息返回出去
+                 */
+            //    Syntax: {field: {$ne: value} }
+                return Category.findOne({
+                    _id:{$ne:id},
+                    name:name
+                })
+            }
+            return Promise.reject()
+        }
+    }).then(function(same){
+        // 得到输入相同类型的信息,进行判断
+        if(same){
+            res.render('admin/error',{
+                userInfo:req.userInfo,
+                message:'该类名已被占用'
+            })
+        }else{
+          return  Category.update({_id:id},{name:name})
+        }
+
+    }).then(function(){
+        res.render('admin/error',{
+            userInfo:req.userInfo,
+            message:'修改成功!',
+            url:'/admin/category/'
+        })
+    })
+})
+
+
+// 分类的删除
+router.get('/category/del',function(req,res,next){
+    var id=req.query.id
+
+    Category.findOne('')
+
+    res.render('admin/')
+})
 
 
 module.exports = router;
