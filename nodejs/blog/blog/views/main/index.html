@@ -7,14 +7,78 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>bolg</title>
     <link rel="stylesheet" href="../../public/css/index.css">
+    <link href="../../public/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    ul,
+    li {
+        list-style: none
+    }
+
+    .nav {
+        width: 1200px;
+        margin: 0 auto
+    }
+
+    .nav li {
+        float: left;
+        width: 10%;
+        /* background: black; */
+        background: gray;
+        color: #fff;
+        margin: 10px;
+        text-align: center;
+        cursor: pointer;
+    }
+    .nav li:hover{
+        background: black;
+    }
+    .nav li a {
+        color: #fff;
+    }
+
+    .nav::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+</style>
 
 <body>
- 
-<!-- id存在表示用户登陆状态 -->
+
+
+    <nav>
+        <ul class="nav">
+            <li>
+                <a href="">html</a>
+            </li>
+            <li>
+                <a href="">javaScript</a>
+            </li>
+            <li>
+                <a href="">nodejs</a>
+            </li>
+            <li>
+                <a href="">http</a>
+            </li>
+            <li>
+                <a href="">python</a>
+            </li>
+            <li>
+                <a href="">css</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- id存在表示用户登陆状态 -->
     {% if userInfo._id %}
     <div class="userInfo">
-        <h1>用户信息</h1>   
+        <h1>用户信息</h1>
         {% if (userInfo.isAdmin) %}
         <span class="user">{{userInfo.username}}</span>
         <p>欢迎管理员！</p>
@@ -22,7 +86,7 @@
         {% else %}
         <span class="user">{{userInfo.username}}</span>
         <p>欢迎！</p>
-        {% endif  %}
+        {% endif %}
         <span class="message"></span>
         <button type="submit" class="exit">退出</button>
     </div>
@@ -51,6 +115,7 @@
     {% endif %}
 </body>
 <script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.js"></script>
+<script src="../../public/dist/js/bootstrap.min.js"></script>
 <script src="../../public/js/main/index.js"></script>
 
 </html>

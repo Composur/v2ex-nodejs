@@ -253,10 +253,45 @@ router.post('/category/edit',function(req,res){
 // 分类的删除
 router.get('/category/del',function(req,res,next){
     var id=req.query.id
+    console.log(id)
+        Category.remove({_id:id}).then(function(){
+            res.render('admin/error',{
+                userInfo:req.userInfo,
+                message:'删除成功!',
+                url:'/admin/category/'
+            })
+    })
+})
 
-    Category.findOne('')
+/**
+ * 内容的保存
+ * 1、展示内容页
+ * 2、添加内容
+ * 3、保存内容
+ */
 
-    res.render('admin/')
+//内容首页 
+router.get('/content',function(req,res){
+    res.render('admin/contents',{
+        userInfo:req.userInfo,
+    })
+ })
+
+
+
+// 内容添加页
+
+router.get('/content/add',function(req,res){
+
+
+    Category.findOne()
+    res.render('admin/contents_add',{
+        userInfo:req.userInfo
+    })
+})
+
+router.post('/content/add',function(req,res){
+
 })
 
 
