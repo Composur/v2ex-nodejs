@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var User=require('../models/users')
 var Category=require('../models/category')
-
+var Content=require('../models/contents')
 
 
 
@@ -100,7 +100,8 @@ router.get('/category',function(req,res,next){
         page=Math.max(page,1)//最小是第一页
 
         var skip=(page-1)*limit
-        Category.find().limit(limit).skip(skip).then(function(categorys){
+        // sort()展现数据的排序1升序，-1降序
+        Category.find().sort({_id:1}).limit(limit).skip(skip).then(function(categorys){
             res.render('admin/category',{
                 userInfo:req.userInfo,
                 categorys:categorys,
@@ -253,7 +254,6 @@ router.post('/category/edit',function(req,res){
 // 分类的删除
 router.get('/category/del',function(req,res,next){
     var id=req.query.id
-    console.log(id)
         Category.remove({_id:id}).then(function(){
             res.render('admin/error',{
                 userInfo:req.userInfo,
@@ -272,8 +272,44 @@ router.get('/category/del',function(req,res,next){
 
 //内容首页 
 router.get('/content',function(req,res){
-    res.render('admin/contents',{
-        userInfo:req.userInfo,
+    
+    /**
+     * 进行分页处理,借用数据库的limit()限制获取的条数
+     * skip(2)忽略掉前两条数据,从第三条数据开始显示
+     * 通过http请求得到前端传来的分页数据\
+     * 用User.count()得到数据的总数
+     */
+    var page=Number(req.query.page||1)
+    var pages=0
+    var limit=10
+
+
+        Content.count().then(function(count){
+        // console.log(count)
+        // 因为是异步的要放到里面
+
+
+        // 计算总页数
+        pages=Math.ceil(count/limit)
+
+        // 限定page的范围
+
+        page=Math.min(page,pages)//最不能大于最大页数
+        page=Math.max(page,1)//最小是第一页
+
+        var skip=(page-1)*limit
+        // sort()展现数据的排序1升序，-1降序
+        Content.find().sort({_id:1}).limit(limit).skip(skip).then(function(contnets){
+            res.render('admin/contents',{
+                userInfo:req.userInfo,
+                contents:contnets,
+                page:page,
+                count:count,
+                limit:limit,
+                pages:pages
+            })
+        })
+
     })
  })
 
@@ -282,17 +318,148 @@ router.get('/content',function(req,res){
 // 内容添加页
 
 router.get('/content/add',function(req,res){
-
-
-    Category.findOne()
-    res.render('admin/contents_add',{
-        userInfo:req.userInfo
+    Category.find().then(function(category){
+        res.render('admin/contents_add',{
+            userInfo:req.userInfo,
+            categorys:category
+        })
     })
+  
 })
 
 router.post('/content/add',function(req,res){
 
+    if(req.body.category==''){
+        res.render('admin/error',{
+            userInfo:req.userInfo,
+            message:'分类名不能为空'
+        })
+        return;
+    }
+    if(req.body.title==''){
+        res.render('admin/error',{
+            userInfo:req.userInfo,
+            message:'标题名不能为空！'
+        })
+        return;
+    }
+    
+        if(req.body.content==''){
+            res.render('admin/error',{
+                userInfo:req.userInfo,
+                message:'内容不能为空！'
+            })
+            return;
+        }
+
+     new Content({
+    category:req.body.category,
+    title:req.body.title,
+    introduction:req.body.introduction,
+    content:req.body.content
+   }).save().then(function(){
+       res.render('admin/error',{
+           userInfo:req.userInfo,
+           message:'保存成功！',
+           url:'/admin/content'
+       })
+   })
+   
 })
+// 内容的修改
+router.get('/content/edit',function(req,res){
+    var id=req.query.id ||'';
+// 分类的读取
+    var category=[];
+    Category.find().then(function(categoryData){
+        category=categoryData
+         // 获取数据;点击删除的a连接已经把id发送给了浏览器
+      return  Content.findOne({
+            _id:id
+        })
+        
+    }).then(function(Id){
+            if(!Id){
+                res.render('admin/error',{
+                    userInfo:req.userInfo,
+                    message:'修改的对象不存在'
+                })
+                return Promise.reject() 
+            }else{
+                console.log(category)
+                res.render('admin/content_edit',{
+                    userInfo:req.userInfo,
+                    category:category,
+                    content:Id
+                })
+            }
+    }) 
+})
+//  内容修改后的保存
+router.post('/content/edit',function(req,res){
+    var id=req.query.id
+    var name=req.body.name.replace(/\s+/g,"")
 
+    // 先判断修改的数据是否在数据库存在
+    Content.findOne({_id:id}).then(function(category){
+        if(!category){
+            res.render('admin/error',{
+                userInfo:req.userInfo,
+                message:'修改的对象不在数据库中'
+            })
+            // return Promise.reject()
+        }else{
+            // 存在 判断是否做了修改
+            if(name==category.name){
+                console.log('true')
+                res.render('admin/error',{
+                    userInfo:req.userInfo,
+                    message:'未对数据进行修改'
+                })
+                return Promise.reject('未对数据进行修改').then(reason=>{
+                    console.log(reason)
+                })
+            }else{
+                /**
+                 * 修改的类名和数据库中存在的一样
+                 * 把这个信息返回出去
+                 */
+            //    Syntax: {field: {$ne: value} }
+                return Content.findOne({
+                    _id:{$ne:id},
+                    name:name
+                })
+            }
+            return Promise.reject()
+        }
+    }).then(function(same){
+        // 得到输入相同类型的信息,进行判断
+        if(same){
+            res.render('admin/error',{
+                userInfo:req.userInfo,
+                message:'该类名已被占用'
+            })
+        }else{
+          return  Content.update({_id:id},{name:name})
+        }
 
+    }).then(function(){
+        res.render('admin/error',{
+            userInfo:req.userInfo,
+            message:'修改成功!',
+            url:'/admin/category/'
+        })
+    })
+})
+// 内容的删除
+router.get('/content/del',function(req,res){
+    var id=req.query.id
+    Content.remove({_id:id}).then(function(){
+        res.render('admin/error',{
+            userInfo:req.userInfo,
+            message:'删除成功!',
+            url:'/admin/content/'
+        })
+})
+})
 module.exports = router;

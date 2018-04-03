@@ -54,10 +54,15 @@
 
     <nav>
         <ul class="nav">
-            <li>
-                <a href="">html</a>
-            </li>
-            <li>
+                <li>
+                        <a href="/">首页</a>
+                </li>
+                {% for  category in categorys%}
+                <li>
+                    <a href="#">{{category.name}}</a>
+                </li>
+                {%endfor%}
+            <!-- <li>
                 <a href="">javaScript</a>
             </li>
             <li>
@@ -71,7 +76,7 @@
             </li>
             <li>
                 <a href="">css</a>
-            </li>
+            </li> -->
         </ul>
     </nav>
 
