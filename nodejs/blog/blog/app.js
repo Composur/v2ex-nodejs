@@ -81,7 +81,7 @@ app.use(function(req,res,next){
 app.use('/',require('./routers/main'))
 app.use('/api',require('./routers/api'))
 app.use('/admin',require('./routers/admin'))
-app.use('*',require('./routers/main'))
+// app.use('*',require('./routers/main'))
 
 // 内容输出
 // app.render(__dirname + '/views')

@@ -13,6 +13,7 @@
     * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
     }
 
     ul,
@@ -20,24 +21,28 @@
         list-style: none
     }
 
-    .nav {
-        width: 1200px;
-        margin: 0 auto
+    nav{
+   
     }
-
+  
+    .nav{
+        border: 1px seagreen solid;
+        text-align: center;
+    }
     .nav li {
         float: left;
         width: 10%;
-        /* background: black; */
         background: gray;
         color: #fff;
         margin: 10px;
         text-align: center;
         cursor: pointer;
     }
-    .nav li:hover{
+
+    .nav li:hover {
         background: black;
     }
+
     .nav li a {
         color: #fff;
     }
@@ -47,77 +52,118 @@
         display: block;
         clear: both;
     }
+
+    .userInfo {
+        border: 1px red solid;
+    }
+
+    .container {
+        width: 1200px;
+        margin: 0 auto;
+        border: 1px saddlebrown solid;
+    }
+    .container::after{
+        content: '';
+        display: block;
+        height: 100%;
+        clear: both;
+    }
+    .container .container-left{
+        float: left;
+    }
+    .container .container-left .content{
+       margin: 10px;
+        border: 1px sandybrown solid;
+    }
+    .container .container-right{
+        float: right;
+    }
 </style>
 
 <body>
-
-
-    <nav>
-        <ul class="nav">
-                <li>
-                        <a href="/">首页</a>
-                </li>
-                {% for  category in categorys%}
-                <li>
-                    <a href="#">{{category.name}}</a>
-                </li>
-                {%endfor%}
-            <!-- <li>
-                <a href="">javaScript</a>
-            </li>
+  <nav>
+      <ul class="nav">
             <li>
-                <a href="">nodejs</a>
+                <a href="/">首页</a>
             </li>
+            {% for key in contents%}
             <li>
-                <a href="">http</a>
+                <a href="#">{{key.category.name}}</a>
             </li>
-            <li>
-                <a href="">python</a>
-            </li>
-            <li>
-                <a href="">css</a>
-            </li> -->
+            {%endfor%}
         </ul>
-    </nav>
+  </nav>
 
-    <!-- id存在表示用户登陆状态 -->
-    {% if userInfo._id %}
-    <div class="userInfo">
-        <h1>用户信息</h1>
-        {% if (userInfo.isAdmin) %}
-        <span class="user">{{userInfo.username}}</span>
-        <p>欢迎管理员！</p>
-        <a href="/admin">进入后台</a>
-        {% else %}
-        <span class="user">{{userInfo.username}}</span>
-        <p>欢迎！</p>
-        {% endif %}
-        <span class="message"></span>
-        <button type="submit" class="exit">退出</button>
+    <div class="container">
+        <div class="container-left">
+            <div class="content">  
+                 <div class="author">
+                        <h1>标题</h1>
+                        <span>作者</span>
+                        <span>时间</span>
+                        <span>阅读数</span>
+                        <span></span>
+                 </div>
+                 <div class="acticle">
+                     文章
+                 </div>
+            </div>
+            <div class="content">  
+                    <div class="author">
+                           <h1>标题</h1>
+                           <span>作者</span>
+                           <span>时间</span>
+                           <span>阅读数</span>
+                           <span></span>
+                    </div>
+                    <div class="acticle">
+                        文章
+                    </div>
+               </div>
+        </div>
+        <div class="container-right">
+            <!-- id存在表示用户登陆状态 -->
+            {% if userInfo._id %}
+            <div class="userInfo">
+                <h1>用户信息</h1>
+                {% if (userInfo.isAdmin) %}
+                <span class="user">{{userInfo.username}}</span>
+                <p>欢迎管理员！</p>
+                <a href="/admin">进入后台</a>
+                {% else %}
+                <span class="user">{{userInfo.username}}</span>
+                <p>欢迎！</p>
+                {% endif %}
+                <span class="message"></span>
+                <button type="submit" class="exit">退出</button>
+            </div>
+            {% else %}
+
+            <div id="login">
+                <h3>登陆</h3>
+                用户名：
+                <input type="text" name="username"> 密码：
+                <input type="text" name="password">
+                <span class="message"></span>
+                <button type="submit" value="登陆">登陆</button>
+                <a href="javaScript:;">点击注册</a>
+            </div>
+
+
+            <div id="register" style="display:none">
+                <h3>注册</h3>
+                用户名：
+                <input type="text" name="username"> 密码：
+                <input type="passwpord" name="password"> 重复密码：
+                <input type="password" name="repassword">
+                <span class="message"></span>
+                <button type="submit">注册</button>
+            </div>
+            {% endif %}
+        </div>
     </div>
-    {% else %}
-
-    <div id="login">
-        <h3>登陆</h3>
-        用户名：
-        <input type="text" name="username"> 密码：
-        <input type="text" name="password">
-        <span class="message"></span>
-        <button type="submit" value="登陆">登陆</button>
-        <a href="javaScript:;">点击注册</a>
-    </div>
 
 
-    <div id="register" style="display:none">
-        <h3>注册</h3>
-        用户名：
-        <input type="text" name="username"> 密码：
-        <input type="passwpord" name="password"> 重复密码：
-        <input type="password" name="repassword">
-        <span class="message"></span>
-        <button type="submit">注册</button>
-    </div>
-    {% endif %}
 </body>
 <script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.js"></script>
 <script src="../../public/dist/js/bootstrap.min.js"></script>

@@ -12,6 +12,8 @@
 {% if url%}
 <a href="{{url}}">返回添加</a>
 {% endif%}
-
+<script>
+         window.location.assign("{{url}}")
+</script>
 
 {%endblock%}

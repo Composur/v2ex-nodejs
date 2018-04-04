@@ -5,7 +5,7 @@ module.exports = new mongoose.Schema({
         //  类型
         type: mongoose.Schema.Types.ObjectId,
         // 引用
-        ref: 'contents'
+        ref: 'category'
     },
     //  关键字段-用户分类的id
     user: {
@@ -31,8 +31,8 @@ module.exports = new mongoose.Schema({
         type: String,
         default: ''
     },
-    content:{
-        type:String,
-        default:''
+    content: {
+        type: String,
+        default: ''
     }
 })
