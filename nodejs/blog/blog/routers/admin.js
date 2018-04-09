@@ -9,6 +9,7 @@ router.use(function (req, res, next) {
     // 非管理员 console.log(req.userInfo.isAdmin)
     if (!req.userInfo.isAdmin) {
         res.send('你不是管理员!')
+        // res.render('main/index')
         return
     }
     next()
@@ -30,7 +31,7 @@ router.get('/user', function (req, res, next) {
  */
     var page = Number(req.query.page || 1)
     var pages = 0
-    var limit = 2
+    var limit = 5
 
     User
         .count()
@@ -55,8 +56,7 @@ router.get('/user', function (req, res, next) {
                         page: page,
                         count: count,
                         limit: limit,
-                        pages: pages,
-                        message: 'active'
+                        pages: pages
                     })
                 })
 

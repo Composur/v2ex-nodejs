@@ -74,4 +74,16 @@ var user=$('.user')
             }
         })
     })
+    // $('.exit').on('click',function(e){
+    //     $.ajax({
+    //         type :'get',
+    //         url:'api/user/exit',
+    //         success:function(result){
+    //            if(!result.code){
+    //             //    登出刷新页面这个时候cookie已经不存在了
+    //                window.location.reload()
+    //            }
+    //         }
+    //     })
+    // })
 })

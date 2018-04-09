@@ -6,167 +6,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>bolg</title>
-    <link rel="stylesheet" href="../../public/css/index.css">
+    <link rel="stylesheet" href="../../public/css/main/index.css">
     <link href="../../public/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
 
-    ul,
-    li {
-        list-style: none
-    }
-
-    nav{
-   
-    }
-  
-    .nav{
-        border: 1px seagreen solid;
-        text-align: center;
-    }
-    .nav li {
-        float: left;
-        width: 10%;
-        background: gray;
-        color: #fff;
-        margin: 10px;
-        text-align: center;
-        cursor: pointer;
-    }
-
-    .nav li:hover {
-        background: black;
-    }
-
-    .nav li a {
-        color: #fff;
-    }
-
-    .nav::after {
-        content: '';
-        display: block;
-        clear: both;
-    }
-
-    .userInfo {
-        border: 1px red solid;
-    }
-
-    .container {
-        width: 1200px;
-        margin: 0 auto;
-        border: 1px saddlebrown solid;
-    }
-    .container::after{
-        content: '';
-        display: block;
-        height: 100%;
-        clear: both;
-    }
-    .container .container-left{
-        float: left;
-    }
-    .container .container-left .content{
-       margin: 10px;
-        border: 1px sandybrown solid;
-    }
-    .container .container-right{
-        float: right;
-    }
 </style>
 
 <body>
-  <nav>
-      <ul class="nav">
-            <li>
-                <a href="/">首页</a>
-            </li>
-            {% for key in contents%}
-            <li>
-                <a href="#">{{key.category.name}}</a>
-            </li>
-            {%endfor%}
-        </ul>
-  </nav>
-
     <div class="container">
-        <div class="container-left">
-            <div class="content">  
-                 <div class="author">
-                        <h1>标题</h1>
-                        <span>作者</span>
-                        <span>时间</span>
-                        <span>阅读数</span>
-                        <span></span>
-                 </div>
-                 <div class="acticle">
-                     文章
-                 </div>
-            </div>
-            <div class="content">  
-                    <div class="author">
-                           <h1>标题</h1>
-                           <span>作者</span>
-                           <span>时间</span>
-                           <span>阅读数</span>
-                           <span></span>
+        <nav>
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active">
+                    <a href="#">首页</a>
+                </li>
+                {% for key in contents%}
+                <li role="presentation">
+                    <a href="#">{{key.category.name}}</a>
+                </li>
+                {%endfor%}
+            </ul>
+        </nav>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="container-left">
+                    <div class="content">
+                        <div class="author">
+                            <h1>标题</h1>
+                            <span>作者</span>
+                            <span>时间</span>
+                            <span>阅读数</span>
+                            <span></span>
+                        </div>
+                        <div class="acticle">
+                            文章
+                        </div>
                     </div>
-                    <div class="acticle">
-                        文章
+                    <div class="content">
+                        <div class="author">
+                            <h1>标题</h1>
+                            <span>作者</span>
+                            <span>时间</span>
+                            <span>阅读数</span>
+                            <span></span>
+                        </div>
+                        <div class="acticle">
+                            文章
+                        </div>
                     </div>
-               </div>
-        </div>
-        <div class="container-right">
-            <!-- id存在表示用户登陆状态 -->
-            {% if userInfo._id %}
-            <div class="userInfo">
-                <h1>用户信息</h1>
-                {% if (userInfo.isAdmin) %}
-                <span class="user">{{userInfo.username}}</span>
-                <p>欢迎管理员！</p>
-                <a href="/admin">进入后台</a>
-                {% else %}
-                <span class="user">{{userInfo.username}}</span>
-                <p>欢迎！</p>
-                {% endif %}
-                <span class="message"></span>
-                <button type="submit" class="exit">退出</button>
+                </div>
             </div>
-            {% else %}
+            <div class="col-md-4">
+                <div class="container-right">
+                    <!-- id存在表示用户登陆状态 -->
+                    {% if userInfo._id %}
+                    <div class="userInfo">
+                        <h4>用户信息</h4>
+                        {% if (userInfo.isAdmin) %}
+                        <span class="user">{{userInfo.username}}</span>
+                        <p>欢迎管理员！</p>
+                        <a href="/admin" class="btn btn-danger">进入后台</a>
+                        {% else %}
+                        <span class="user">{{userInfo.username}}</span>
+                        <p>欢迎！</p>
+                        {% endif %}
+                        <span class="message"></span>
+                        <button type="submit" class="exit btn">退出</button>
+                    </div>
+                    {% else %}
+                    <div class="form-horizontal" id="login">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label username">用户名</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="用户名" name="username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label password">密码</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name="password">
+                            </div>
+                        </div>
+                        <div class="form-group message">
+                            <span class="message"></span>
+                        </div>
 
-            <div id="login">
-                <h3>登陆</h3>
-                用户名：
-                <input type="text" name="username"> 密码：
-                <input type="text" name="password">
-                <span class="message"></span>
-                <button type="submit" value="登陆">登陆</button>
-                <a href="javaScript:;">点击注册</a>
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button type="submit" class="btn btn-default">登录</button>
+                                <a class="btn" href="javaScript:;">点击注册</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="register" style="display:none" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">用户名</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="用户名" name="username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label">密码</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="inputPassword" placeholder="password" name="password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-3 control-label">重复密码</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="inputPasswor" placeholder="repassword" name="repassword">
+                                </div>
+                            </div>
+                        <div class="form-group message">
+                            <span class="message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <button type="submit" class="btn btn-default">注册</button>   
+                                <a href="/">登录</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
-
-
-            <div id="register" style="display:none">
-                <h3>注册</h3>
-                用户名：
-                <input type="text" name="username"> 密码：
-                <input type="passwpord" name="password"> 重复密码：
-                <input type="password" name="repassword">
-                <span class="message"></span>
-                <button type="submit">注册</button>
-            </div>
-            {% endif %}
         </div>
     </div>
-
-
 </body>
 <script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.js"></script>
 <script src="../../public/dist/js/bootstrap.min.js"></script>
 <script src="../../public/js/main/index.js"></script>
-
 </html>
