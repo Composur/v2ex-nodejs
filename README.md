@@ -1,8 +1,13 @@
 ###  学习node时的小项目
 #### music
  + [music]({https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/musicPlayer})
+ #### [express-crud
  + [express-crud](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/express-crud)
+ #### avatar
  + [avatar](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/avatar)
+ #### blong
  + [blog](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/blog)
+ #### blog
  + [node-blog](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/sendMail)
+ #### sendMail
  + [sendMail](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/sendMail)
