@@ -26,4 +26,6 @@ function Toast(msg,time){
     return new toast(msg,time)
 }
 
-module.exports=Toast
+
+// 不能  module.exports=Toast 因为Toast是个函数，如果是对象的话可以这样写
+module.exports.Toast=Toast 
