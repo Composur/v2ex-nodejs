@@ -1,7 +1,2 @@
 var test=require('./detail')
-
-function fn(){
-    console.log(test)
-    return test
-}
-module.exports=fn
+var toast=require('../mod/toast')
