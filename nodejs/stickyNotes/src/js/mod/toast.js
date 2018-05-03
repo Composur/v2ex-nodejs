@@ -1,3 +1,4 @@
+require('less/toast.less')
 function toast(msg,time){
     this.msg=msg
     this.time=time||1000

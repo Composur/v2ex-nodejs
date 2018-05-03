@@ -18,9 +18,9 @@ module.exports={
     },
     resolve:{
         alias:{
-            jquery:path.join(__dirname,'./js/lib/jquery.min.js'),
-            mod:path.join(__dirname,'./js/mod'),
-            less:path.join(__dirname,'./less')
+            jquery:path.join(__dirname,'js/lib/jquery.min.js'),
+            mod:path.join(__dirname,'js/mod'),
+            less:path.join(__dirname,'less')
         }
     },
     plugins:[

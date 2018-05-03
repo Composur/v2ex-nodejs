@@ -1,4 +1,4 @@
 var test=require('./detail')
-var toast=require('../mod/toast')
+var toast=require('../mod/toast').Toast
 
-toast.Toast('TEST')
+toast('TEST')
