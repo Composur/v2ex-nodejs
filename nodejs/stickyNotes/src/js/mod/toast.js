@@ -1,32 +1,32 @@
-require('less/toast.less')
-function toast(msg,time){
-    this.msg=msg
-    this.time=time||1000
-    this.createToast()
-    this.showToast()
+require('less/toast.less');
+
+function toast(msg, time){
+  this.msg = msg;
+  this.dismissTime = time||1000;  //ms
+  this.createToast();
+  this.showToast();
 }
-toast.prototype={
-    createToast:function(){
-        var tpl=`<div class='toast'>${this.msg}</div>`
-        this.$toast=$(tpl)
-        $('body').append(this.$toast)
-    },
-    showToast:function(){
-        var _this=this
-        this.$toast.fadeIn(300,function(){
-            setTimeout(() => {
-                _this.$toast.fadeOut(300,function(){
-                    _this.$toast.remove()
-                })
-            }, _this.time);
-        })
-    }
-}
+toast.prototype = {
+  createToast: function(){
+    var tpl = '<div class="toast">'+this.msg+'</div>';
+    this.$toast = $(tpl);
+    $('body').append(this.$toast);
+  },
+  showToast: function(){
+    var self = this;
+    this.$toast.fadeIn(300, function(){
+      setTimeout(function(){
+         self.$toast.fadeOut(300,function(){
+           self.$toast.remove();
+         });
+      }, self.dismissTime);
+    });
+
+  }
+};
 
 function Toast(msg,time){
-    return new toast(msg,time)
+  return new toast(msg, time);
 }
 
-
-// 不能  module.exports=Toast 因为Toast是个函数，如果是对象的话可以这样写
-module.exports.Toast=Toast 
+module.exports.Toast = Toast;

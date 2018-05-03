@@ -16,6 +16,8 @@
     "jquery": "^3.3.1",
     "morgan": "~1.9.0",
     "onchange": "^3.3.0",
+    "sequelize": "^4.37.6",
+    "sqlite3": "^4.0.0",
     "webpack": "^4.6.0"
   },
   "devDependencies": {
