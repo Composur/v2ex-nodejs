@@ -35,7 +35,9 @@ var NoteManager = (function(){
   }
 
   return {
+    // 加载数据
     load: load,
+    // 点击按钮创建
     add: add
   }
 
