@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var api=require('./routes/api')
-
+var auth=require('./routes/auth')
 var app = express();
 
 // view engine setup
@@ -28,7 +28,8 @@ app.use('/users', usersRouter);
 // add CRUD api
 app.use('/api',api)
 
-
+// oAuth2.0
+app.use('/auth',auth)
 // 设置全局的userInfo
 // app.use(function(req,res,next){
 //   req.userInfo={'title':"test"}
