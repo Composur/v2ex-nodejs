@@ -33,10 +33,10 @@ const Note = sequelize.define('note', {
 // force: true will drop the table if it already exists
 Note.sync().then(() => {
     // Table created
-    return Note.create({
+   Note.create({
       text: 'text'
     }).then(function(){
-        Note.findAll({raw:true}).then(function(data){
+        Note.destroy({raw:true}).then(function(data){
           
         })
     })

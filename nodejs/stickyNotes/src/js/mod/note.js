@@ -106,7 +106,7 @@ Note.prototype = {
 
   edit: function (msg) {
     var self = this;
-    $.post('/api/notes/edit',{
+    $.post('/api/notes/update',{
         id: this.id,
         note: msg
       }).done(function(ret){
@@ -136,7 +136,7 @@ Note.prototype = {
 
   delete: function(){
     var self = this;
-    $.post('/api/notes/delete', {id: this.id})
+    $.post('/api/notes/del', {id: this.id})
       .done(function(ret){
         if(ret.status === 0){
           Toast('delete success');

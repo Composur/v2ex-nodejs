@@ -13,6 +13,7 @@ router.get('/notes',function(req,res,next){
     })
 })
 
+// 添加便利贴数据
 router.post('/notes/add',function(req,res,next){
     var note=req.body.note
     Note.create({text:note}).then(function(){
@@ -22,12 +23,25 @@ router.post('/notes/add',function(req,res,next){
     })
 })
 
-router.get('/notes/del',function(req,res,next){
-
+// 删除
+router.post('/notes/del',function(req,res,next){
+    var note=req.body.note
+    Note.destroy({where:{id:req.body.id}}).then(function(){
+        res.send({status:0})
+    }).catch(function(err){
+        res.send({errorMsg:'删除出错'})
+        console.log(err)
+    })
 })
 
-router.get('/notes/update',function(req,res,next){
-
+// 更新
+router.post('/notes/update',function(req,res,next){
+    var note=req.body.note
+    Note.update({text:note},{where:{id:req.body.id}}).then(function(){
+        res.send({status:0})
+    }).catch(function(){
+        res.send({status:1,errorMsg:'修改失败！'})
+    })
 })
 
 module.exports=router
