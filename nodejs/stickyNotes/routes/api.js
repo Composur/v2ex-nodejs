@@ -4,6 +4,9 @@ var Note=require('../model/note').Note
 
 // 首页加载查询所有
 router.get('/notes',function(req,res,next){
+    if(!req.query.session.user){
+        return res.send({status:1,errorMsg:'请登陆'})
+    }
     var note=req.body.note
     Note.findAll({raw:true}).then(data=>{
         res.send({
