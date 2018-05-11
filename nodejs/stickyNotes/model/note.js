@@ -36,9 +36,9 @@ Note.sync().then(() => {
    Note.create({
       text: 'text'
     }).then(function(){
-        Note.destroy({raw:true}).then(function(data){
+        // Note.destroy({raw:true}).then(function(data){
           
-        })
+        // })
     })
   })
 
