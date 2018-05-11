@@ -4,9 +4,9 @@ var Note=require('../model/note').Note
 
 // 首页加载查询所有
 router.get('/notes',function(req,res,next){
-    // if(!req.session.user){
-    //     return res.send({status:1,errorMsg:'请登陆'})
-    // }
+    if(!req.session.user){
+        return res.send({status:1,errorMsg:'请登陆'})
+    }
     var note=req.body.note
     Note.findAll({raw:true}).then(data=>{
         res.send({
@@ -18,6 +18,9 @@ router.get('/notes',function(req,res,next){
 
 // 添加便利贴数据
 router.post('/notes/add',function(req,res,next){
+    if(!req.session.user){
+        return res.send({status:1,errorMsg:'请登陆'})
+    }
     var note=req.body.note
     Note.create({text:note}).then(function(){
         res.send({status:0})
@@ -28,6 +31,9 @@ router.post('/notes/add',function(req,res,next){
 
 // 删除
 router.post('/notes/del',function(req,res,next){
+    if(!req.session.user){
+        return res.send({status:1,errorMsg:'请登陆'})
+    }
     var note=req.body.note
     Note.destroy({where:{id:req.body.id}}).then(function(){
         res.send({status:0})
@@ -39,6 +45,9 @@ router.post('/notes/del',function(req,res,next){
 
 // 更新
 router.post('/notes/update',function(req,res,next){
+    if(!req.session.user){
+        return res.send({status:1,errorMsg:'请登陆'})
+    }
     var note=req.body.note
     Note.update({text:note},{where:{id:req.body.id}}).then(function(){
         res.send({status:0})
