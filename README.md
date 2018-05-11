@@ -11,4 +11,4 @@
  
  + [sendMail](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/sendMail)
 
- + [sendMail](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/stickyNotes)
+ + [sitickNotes](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/stickyNotes)
