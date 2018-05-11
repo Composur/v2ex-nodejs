@@ -45,4 +45,3 @@ Note.sync({force:true}).then(() => {
 // Note.find({raw:true,where:{id:2}}).then(data=>{console.log(data)})
 module.exports.Note=Note
 
-  

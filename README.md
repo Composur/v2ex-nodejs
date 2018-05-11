@@ -10,3 +10,5 @@
  + [node-blog](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/sendMail)
  
  + [sendMail](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/sendMail)
+
+ + [sendMail](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/stickyNotes)
