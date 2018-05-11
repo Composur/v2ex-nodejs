@@ -31,7 +31,7 @@ const Note = sequelize.define('note', {
     }
   });
 // force: true will drop the table if it already exists
-Note.sync().then(() => {
+Note.sync({force:true}).then(() => {
     // Table created
    Note.create({
       text: 'text'
