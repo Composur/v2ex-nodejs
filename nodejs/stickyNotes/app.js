@@ -3,7 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var session=require('express-session')
+var passport=require('passport')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var api=require('./routes/api')
@@ -19,6 +20,14 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 // 静态资源
 app.use(express.static(path.join(__dirname, 'public')));  
 
