@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   var Login;
   if(req.session.user){
     Login= {
-      title:'hahah',
+      title:'小便签',
       isLogin:true,
       user:{
         username:req.user.displayName || req.user.username,
