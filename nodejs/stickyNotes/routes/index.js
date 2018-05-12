@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
     }
   }else{
     Login={
-      title:'hahah',
+      title:'小便签',
       isLogin:false
     }
   }
