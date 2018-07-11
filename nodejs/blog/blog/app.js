@@ -1,4 +1,5 @@
 var express=require('express')
+var path = require('path');
 var app=express()
 var swig=require('swig')
 var mongoose=require('./db/mongoose')
@@ -29,7 +30,7 @@ swig.setDefaults({
 // 以下是中间件的配置,用户的访问都会经过中间件
 
 // 设置静态文件托管目录
-app.use('/public',express.static(__dirname+'/public'))
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 // bodyParser设置,会在app对象的req对象上增加一个属性body（post提交的数据）
