@@ -20,6 +20,19 @@ router.get('/', function (req, res, next) {
     res.render('admin/index', {userInfo: req.userInfo})
 });
 
+
+// pdf 
+router.get('/PDF/test',function(req,res,next){
+    res.render('admin/PDF/test',{
+        userInfo:req.userInfo
+    })
+})
+router.get('/PDF/read',function(req,res,next){
+    res.render('admin/PDF/data/the-road-to-learn-react-chinese',{
+        userInfo:req.userInfo
+    })
+})
+
 //用户管理
 router.get('/user', function (req, res, next) {
 
