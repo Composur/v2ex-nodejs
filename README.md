@@ -1,4 +1,5 @@
 ###  学习node时的小项目
+ + [NodeJS小游戏](./CommonJS/readme.md)
  + [music](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/musicPlayer)
 
  + [express-crud](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/express-crud)
