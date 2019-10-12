@@ -1,5 +1,5 @@
 const EventEmitter=require('events').EventEmitter
-
+const os=require('os')
 class Test extends EventEmitter{
   constructor(){
     super()
@@ -8,5 +8,5 @@ class Test extends EventEmitter{
     }, 3000);
   }
 }
-
+console.log(os.cpus())
 module.exports=Test
