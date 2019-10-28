@@ -4,9 +4,9 @@ class Test extends EventEmitter{
   constructor(){
     super()
     setInterval(() => {
-      this.emit('listen',{date:Date.now()}) //可以抛出一些东西出来
-    }, 3000);
+      this.emit('listen',{date:Date(),test:'三秒触发一次'}) //可以抛出一些东西出来
+    }, 1000);
   }
 }
-console.log(os.cpus())
+// console.log(os.cpus())
 module.exports=Test

@@ -7,14 +7,14 @@ db.sendMail = function (xlsxname, callback) {
   var transporter = nodemailer.createTransport({
     service: 'qq',
     auth: {
-      user: '541157208@qq.com',
+      user: 'xx@qq.com',
       pass: 'yfdorjoipayybfjh'   
     }
   });
 
   var mailOptions = {
-    from: '541157208@qq.com', //你的邮箱
-    to: `2453555631@qq.com`, //你老板的邮箱
+    from: 'xx@qq.com', //你的邮箱
+    to: `xx@qq.com`, //你老板的邮箱
     subject: '客户数据!', 
     html: `<h3>请下载excel表格查看数据</h3>` ,
     attachments:[{
