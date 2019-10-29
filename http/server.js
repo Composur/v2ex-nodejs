@@ -32,7 +32,7 @@ const app = http.createServer((req, res) => {
     }
 
     res.writeHead(200);
-
+    // const urlObj = url.parse(req.url, true); //这里设置第二个参数为true就能直接解析query了，
     const playAction = queryString.parse(urlParse.query)
     const action = playAction.action
     const gameResult = gameStart(action)
@@ -43,7 +43,6 @@ const app = http.createServer((req, res) => {
     } else {
       sameActionCount = 0
     }
-    console.log(sameActionCount)
     lastPlayAction = action
 
     if (gameResult === 0) {
