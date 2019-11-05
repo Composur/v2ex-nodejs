@@ -1,3 +1,10 @@
+### 学习笔记
++ CommonJS 
+ + async、emitter、IO、net
+ + http
+ + eventLoop
+ + RPC
+ + RESTful
 ###  学习node时的小项目
  + [NodeJS小游戏](https://github.com/Composur/v2ex-nodejs/tree/master/CommonJS)
 
@@ -14,4 +21,5 @@
  + [sendMail](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/sendMail)
 
  + [sitickNotes](https://github.com/Composur/v2ex-nodejs/tree/master/nodejs/stickyNotes)
+
 
