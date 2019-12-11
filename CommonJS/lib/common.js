@@ -1,3 +1,4 @@
+// 如果没有导出 其它文件引入该文件默认是一个空对象
 module.exports = function (userAction) {
   const { log } = console
   // 计算机随机出一个
