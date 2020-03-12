@@ -1,8 +1,10 @@
 const net = require('net')
-
+const buffer = Buffer.alloc(4)
 const server = net.createServer(socket=>{
   socket.on('data',data=>{
-    console.log(data) //<Buffer 74 65 73 74 20 66 6f 72 20 63 6c 69 65 6e 74 21>
+    // get client send data 
+    console.log(data,data.toString())
+    buffer.write('send client')
   })
 })
 
