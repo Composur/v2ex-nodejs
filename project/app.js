@@ -6,7 +6,7 @@ const static = require('koa-static')
 const config = require("./config");
 const app = new Koa();
 
-// 静态资源
+// 静态资源 
 app.use(static(__dirname+'/source/'))
 
 const str = fs.readFileSync(path.resolve(__dirname, "./source/index.htm"));
